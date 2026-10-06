@@ -1,7 +1,8 @@
-﻿import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+﻿import { useState } from 'react'
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, Package, Boxes, ShoppingCart, ClipboardList,
-  Users, BarChart3, LogOut, Bell, Lock, Wallet,
+  Users, BarChart3, LogOut, Bell, Lock, Wallet, Menu, X,
 } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import { usePermissions } from '@/features/auth/usePermissions'
@@ -36,28 +37,58 @@ const ROL_LABEL: Record<string, string> = {
 export function AdminLayout() {
   const { user, logout } = useAuthStore()
   const navigate = useNavigate()
+  const location = useLocation()
   const { puede } = usePermissions()
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const handleLogout = () => {
     logout()
-    navigate('/login', { replace: true })
+    window.location.href = '/login'
   }
 
   const navVisible = NAV.filter((item) => puede(item.modulo))
 
+  // Cerrar drawer al cambiar de ruta (móvil)
+  const handleNavClick = () => setDrawerOpen(false)
+
   return (
     <div className="h-screen flex bg-ink-100 overflow-hidden">
-      <aside className="w-64 shrink-0 bg-ink-900 text-ink-200 flex flex-col">
+      {/* ============ Overlay móvil ============ */}
+      {drawerOpen && (
+        <div
+          className="fixed inset-0 bg-ink-900/60 z-40 lg:hidden"
+          onClick={() => setDrawerOpen(false)}
+        />
+      )}
+
+      {/* ============ Sidebar ============ */}
+      <aside
+        className={
+          'w-64 shrink-0 bg-ink-900 text-ink-200 flex flex-col z-50 ' +
+          'fixed inset-y-0 left-0 transform transition-transform duration-300 ' +
+          'lg:relative lg:translate-x-0 ' +
+          (drawerOpen ? 'translate-x-0' : '-translate-x-full')
+        }
+      >
+        {/* Logo + botón cerrar en móvil */}
         <div className="h-16 flex items-center px-5 border-b border-ink-700 shrink-0">
           <span className="font-black text-lg text-white">EL YUNQUE</span>
           <span className="ml-2 h-2 w-2 rounded-full bg-yunque-500" />
+          <button
+            onClick={() => setDrawerOpen(false)}
+            className="ml-auto lg:hidden p-1.5 rounded-lg hover:bg-ink-700 text-ink-300"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
+        {/* Nav */}
         <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
           {navVisible.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
+              onClick={handleNavClick}
               className={({ isActive }) =>
                 'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ' +
                 (isActive
@@ -78,6 +109,7 @@ export function AdminLayout() {
           )}
         </nav>
 
+        {/* Footer usuario */}
         <div className="p-3 border-t border-ink-700 shrink-0">
           <div className="flex items-center gap-3 px-2 py-2">
             <div className="h-8 w-8 rounded-full bg-yunque-500 text-ink-900 flex items-center justify-center font-bold shrink-0">
@@ -99,18 +131,33 @@ export function AdminLayout() {
         </div>
       </aside>
 
+      {/* ============ Contenido ============ */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 shrink-0 bg-white border-b border-ink-200 flex items-center px-6 gap-4">
-          <h1 className="font-semibold text-ink-900">Panel administrativo</h1>
-          <div className="ml-auto flex items-center gap-3">
+        {/* Header */}
+        <header className="h-16 shrink-0 bg-white border-b border-ink-200 flex items-center px-4 lg:px-6 gap-3">
+          {/* Botón hamburguesa (móvil) */}
+          <button
+            onClick={() => setDrawerOpen(true)}
+            className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-ink-100"
+            aria-label="Abrir menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+
+          <h1 className="font-semibold text-ink-900 text-sm lg:text-base truncate">
+            Panel administrativo
+          </h1>
+
+          <div className="ml-auto flex items-center gap-2">
             <button className="p-2 rounded-lg hover:bg-ink-100">
               <Bell className="h-5 w-5" />
             </button>
           </div>
         </header>
 
+        {/* Main scrolleable */}
         <main className="flex-1 overflow-y-auto">
-          <div className="p-6 page-enter">
+          <div className="p-4 lg:p-6 page-enter">
             <Outlet />
           </div>
         </main>
