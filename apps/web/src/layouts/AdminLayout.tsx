@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import {
   LayoutDashboard, Package, Boxes, ShoppingCart, ClipboardList,
   Users, BarChart3, LogOut, Bell, Lock, Wallet, Menu, X,
@@ -36,8 +36,6 @@ const ROL_LABEL: Record<string, string> = {
 
 export function AdminLayout() {
   const { user, logout } = useAuthStore()
-  const navigate = useNavigate()
-  const location = useLocation()
   const { puede } = usePermissions()
   const [drawerOpen, setDrawerOpen] = useState(false)
 
