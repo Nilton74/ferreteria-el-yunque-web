@@ -76,7 +76,13 @@ export default function PosPage() {
         tipo: 'salida',
         cantidad: item.cantidad,
         motivo: 'Venta mostrador',
-        notas: 'POS · ' + metodo.toUpperCase() + ' · Recibido: ' + formatCurrency(recibido) + ' · Ticket #' + ticketNum,
+        notas:
+          'POS · ' +
+          metodo.toUpperCase() +
+          ' · Recibido: ' +
+          formatCurrency(recibido) +
+          ' · Ticket #' +
+          ticketNum,
         usuario: user?.nombre ?? 'Vendedor',
       })
     })
@@ -106,10 +112,14 @@ export default function PosPage() {
           <div className="rounded-xl border border-orange-200 bg-orange-50 p-3 flex items-start gap-2 text-sm shrink-0">
             <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 shrink-0" />
             <div className="flex-1">
-              <p className="font-semibold text-orange-900 text-sm">No hay turno de caja abierto</p>
+              <p className="font-semibold text-orange-900 text-sm">
+                No hay turno de caja abierto
+              </p>
               <p className="text-orange-700 text-xs mt-0.5">
                 Puedes vender, pero la operación NO se registrará en caja.{' '}
-                <Link to="/admin/caja" className="font-bold underline">Abrir caja</Link>
+                <Link to="/admin/caja" className="font-bold underline">
+                  Abrir caja
+                </Link>
               </p>
             </div>
           </div>
@@ -137,7 +147,10 @@ export default function PosPage() {
           </div>
 
           <div className="mt-3 flex flex-wrap gap-1.5 lg:gap-2">
-            <CategoriaChip activo={filtroCategoria === ''} onClick={() => setFiltroCategoria('')}>
+            <CategoriaChip
+              activo={filtroCategoria === ''}
+              onClick={() => setFiltroCategoria('')}
+            >
               Todos
             </CategoriaChip>
             {CATEGORIAS.slice(0, 6).map((c) => (
@@ -166,20 +179,30 @@ export default function PosPage() {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3">
               {productosFiltrados.map((p) => (
-                <ProductoTile key={p.id} producto={p} onClick={() => agregar(p)} />
+                <ProductoTile
+                  key={p.id}
+                  producto={p}
+                  onClick={() => agregar(p)}
+                />
               ))}
             </div>
           )}
         </div>
 
-        {/* Espacio para que no tape el floating button */}
+        {/* Espacio para que el floating button no tape contenido en móvil */}
         <div className="h-20 lg:hidden" />
       </div>
 
       {/* ==================== Ticket de escritorio ==================== */}
       <aside className="hidden lg:grid grid-rows-[auto_1fr_auto] rounded-2xl border border-ink-200 bg-white overflow-hidden min-h-0">
         <TicketHeader itemsCount={totalItems} />
-        <TicketBody items={items} setCantidad={setCantidad} quitar={quitar} />
+        <div className="overflow-y-auto">
+          <TicketBody
+            items={items}
+            setCantidad={setCantidad}
+            quitar={quitar}
+          />
+        </div>
         <TicketFooter
           items={items}
           subtotal={subtotalValue}
@@ -194,7 +217,7 @@ export default function PosPage() {
       </aside>
 
       {/* ==================== Floating button (móvil) ==================== */}
-      {items.length > 0 && (
+      {items.length > 0 && !ticketDrawerOpen && (
         <button
           onClick={() => setTicketDrawerOpen(true)}
           className="lg:hidden fixed bottom-4 left-4 right-4 z-30 rounded-2xl bg-yunque-500 text-ink-900 px-5 py-3.5 shadow-2xl flex items-center justify-between font-bold"
@@ -216,38 +239,60 @@ export default function PosPage() {
       {ticketDrawerOpen && (
         <>
           <div
-            className="lg:hidden fixed inset-0 bg-ink-900/60 z-40"
+            className="lg:hidden fixed inset-0 bg-ink-900/50 z-40"
             onClick={() => setTicketDrawerOpen(false)}
           />
-          <div className="lg:hidden fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl max-h-[90vh] grid grid-rows-[auto_1fr_auto]">
-            <div className="flex items-center justify-between px-4 pt-4 pb-2">
-              <div className="w-10" />
-              <div className="h-1 w-12 rounded-full bg-ink-200" />
+          <div className="lg:hidden fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl flex flex-col max-h-[82vh] shadow-2xl">
+            {/* Handle superior */}
+            <div className="shrink-0 flex items-center justify-between px-4 pt-3 pb-2">
+              <div className="w-8" />
+              <div className="h-1.5 w-12 rounded-full bg-ink-200" />
               <button
                 onClick={() => setTicketDrawerOpen(false)}
                 className="p-1.5 rounded-lg hover:bg-ink-100"
+                aria-label="Cerrar ticket"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <TicketHeader itemsCount={totalItems} />
-            <div className="overflow-y-auto">
-              <TicketBody items={items} setCantidad={setCantidad} quitar={quitar} />
+
+            {/* Header del ticket */}
+            <div className="shrink-0 flex items-center gap-2 px-4 pb-3 border-b border-ink-200">
+              <ShoppingCart className="h-5 w-5 text-ink-700" />
+              <h2 className="font-bold text-ink-900">Ticket actual</h2>
+              {totalItems > 0 && (
+                <span className="ml-auto rounded-full bg-yunque-500 text-ink-900 text-xs font-bold px-2.5 py-1">
+                  {totalItems} uds
+                </span>
+              )}
             </div>
-            <TicketFooter
-              items={items}
-              subtotal={subtotalValue}
-              descuento={descuento}
-              descuentoValue={descuentoValue}
-              iva={ivaValue}
-              total={totalValue}
-              setDescuento={setDescuento}
-              vaciar={vaciar}
-              onCobrar={() => {
-                setTicketDrawerOpen(false)
-                setPaymentOpen(true)
-              }}
-            />
+
+            {/* Items con scroll real */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
+              <TicketBody
+                items={items}
+                setCantidad={setCantidad}
+                quitar={quitar}
+              />
+            </div>
+
+            {/* Footer con totales */}
+            <div className="shrink-0 border-t border-ink-200 bg-ink-50/60">
+              <TicketFooter
+                items={items}
+                subtotal={subtotalValue}
+                descuento={descuento}
+                descuentoValue={descuentoValue}
+                iva={ivaValue}
+                total={totalValue}
+                setDescuento={setDescuento}
+                vaciar={vaciar}
+                onCobrar={() => {
+                  setTicketDrawerOpen(false)
+                  setPaymentOpen(true)
+                }}
+              />
+            </div>
           </div>
         </>
       )}
@@ -260,6 +305,7 @@ export default function PosPage() {
         total={totalValue}
       />
 
+      {/* Toast de éxito */}
       {success && (
         <div className="fixed top-4 right-4 left-4 lg:left-auto lg:w-96 z-[60] rounded-2xl bg-green-600 text-white px-4 py-3.5 shadow-2xl flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-white/20 grid place-items-center shrink-0">
@@ -271,7 +317,10 @@ export default function PosPage() {
               {turnoAbierto ? 'Stock y caja actualizados' : 'Stock actualizado'}
             </p>
           </div>
-          <Link to="/admin/caja" className="text-xs font-semibold underline shrink-0">
+          <Link
+            to="/admin/caja"
+            className="text-xs font-semibold underline shrink-0"
+          >
             Ver caja
           </Link>
         </div>
@@ -280,7 +329,9 @@ export default function PosPage() {
   )
 }
 
-// ==================== Subcomponentes ====================
+// ============================================
+// Subcomponentes
+// ============================================
 
 function TicketHeader({ itemsCount }: { itemsCount: number }) {
   return (
@@ -320,16 +371,16 @@ function TicketBody({
   }
 
   return (
-    <div className="p-3 lg:p-4 space-y-2 lg:space-y-3">
+    <div className="p-2.5 lg:p-4 space-y-2 lg:space-y-3">
       {items.map((item) => (
         <div
           key={item.productoId}
-          className="flex gap-3 rounded-xl border border-ink-200 p-2.5 lg:p-3"
+          className="flex gap-2.5 rounded-xl border border-ink-200 p-2 lg:p-3"
         >
           <img
             src={item.imagen}
             alt={item.nombre}
-            className="h-14 w-14 rounded-lg object-cover border border-ink-200 shrink-0"
+            className="h-12 w-12 lg:h-14 lg:w-14 rounded-lg object-cover border border-ink-200 shrink-0"
           />
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-ink-900 line-clamp-2">
@@ -339,7 +390,9 @@ function TicketBody({
             <div className="mt-1.5 flex items-center gap-2">
               <div className="inline-flex items-center rounded-md border border-ink-200">
                 <button
-                  onClick={() => setCantidad(item.productoId, item.cantidad - 1)}
+                  onClick={() =>
+                    setCantidad(item.productoId, item.cantidad - 1)
+                  }
                   className="h-7 w-7 grid place-items-center hover:bg-ink-100 rounded-l-md"
                 >
                   <Minus className="h-3 w-3" />
@@ -348,14 +401,18 @@ function TicketBody({
                   {item.cantidad}
                 </span>
                 <button
-                  onClick={() => setCantidad(item.productoId, item.cantidad + 1)}
+                  onClick={() =>
+                    setCantidad(item.productoId, item.cantidad + 1)
+                  }
                   disabled={item.cantidad >= item.stockDisponible}
                   className="h-7 w-7 grid place-items-center hover:bg-ink-100 rounded-r-md disabled:opacity-40"
                 >
                   <Plus className="h-3 w-3" />
                 </button>
               </div>
-              <span className="text-xs text-ink-400">{formatCurrency(item.precio)}</span>
+              <span className="text-xs text-ink-400">
+                {formatCurrency(item.precio)}
+              </span>
               <button
                 onClick={() => quitar(item.productoId)}
                 className="ml-auto p-1.5 rounded-md text-ink-400 hover:bg-red-50 hover:text-red-600"
@@ -493,6 +550,7 @@ function ProductoTile({
   onClick: () => void
 }) {
   const stockBajo = producto.stock <= producto.stockMinimo
+
   return (
     <button
       onClick={onClick}
@@ -556,7 +614,9 @@ function Row({
   return (
     <div className="flex justify-between">
       <span className="text-ink-500">{label}</span>
-      <span className={cn('font-medium text-ink-900', valueClass)}>{value}</span>
+      <span className={cn('font-medium text-ink-900', valueClass)}>
+        {value}
+      </span>
     </div>
   )
 }
