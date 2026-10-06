@@ -1,4 +1,4 @@
-import {
+﻿import {
   ResponsiveContainer,
   AreaChart,
   Area,
@@ -15,7 +15,7 @@ export function SalesChart() {
     <div className="rounded-2xl border border-ink-200 bg-white p-4 lg:p-6">
       <div className="flex items-end justify-between mb-6">
         <div>
-          <h3 className="text-lg font-bold text-ink-900">Ventas últimos 7 días</h3>
+          <h3 className="text-lg font-bold text-ink-900">Ventas Ãºltimos 7 dÃ­as</h3>
           <p className="text-sm text-ink-500">Ingresos diarios</p>
         </div>
         <div className="text-right">
@@ -50,7 +50,7 @@ export function SalesChart() {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(v) => `€${v / 1000}k`}
+              tickFormatter={(v) => `â‚¬${v / 1000}k`}
             />
             <Tooltip
               contentStyle={{

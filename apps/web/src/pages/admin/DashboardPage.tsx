@@ -88,7 +88,7 @@ export default function DashboardPage() {
         <LowStockAlerts />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-4 lg:gap-6">
         <CategoryChart />
         <TopProducts />
       </div>
@@ -139,4 +139,5 @@ function MiniKpi({
     </div>
   )
 }
+
 
