@@ -26,7 +26,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
         <KpiCard
           label="Ventas hoy"
           value={formatCurrency(KPIS.ventasHoy)}
@@ -56,7 +56,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
         <MiniKpi
           label="Ticket promedio"
           value={formatCurrency(KPIS.ticketPromedio)}
@@ -81,7 +81,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 lg:gap-6">
         <div className="lg:col-span-2">
           <SalesChart />
         </div>
