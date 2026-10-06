@@ -19,15 +19,10 @@ export function KpiCard({
   const positivo = change !== undefined && change >= 0
 
   return (
-    <div className="rounded-2xl border border-ink-200 bg-white p-5 hover:shadow-md transition">
+    <div className="rounded-2xl border border-ink-200 bg-white p-3 lg:p-5 hover:shadow-md transition">
       <div className="flex items-start justify-between">
-        <div
-          className={cn(
-            'h-11 w-11 grid place-items-center rounded-xl bg-yunque-50',
-            iconColor,
-          )}
-        >
-          <Icon className="h-5 w-5" />
+        <div className={cn('h-9 w-9 lg:h-11 lg:w-11 grid place-items-center rounded-xl bg-yunque-50', iconColor)}>
+         <Icon className="h-4 w-4 lg:h-5 lg:w-5" />
         </div>
 
         {change !== undefined && (
@@ -51,7 +46,7 @@ export function KpiCard({
       </div>
 
       <p className="mt-4 text-sm font-medium text-ink-500">{label}</p>
-      <p className="mt-1 text-2xl font-black text-ink-900">{value}</p>
+     <p className="mt-1 text-lg lg:text-2xl font-black text-ink-900">{value}</p>
     </div>
   )
 }
