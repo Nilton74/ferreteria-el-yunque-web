@@ -12,7 +12,7 @@ import { formatCurrency } from '@/lib/utils'
 
 export function SalesChart() {
   return (
-    <div className="rounded-2xl border border-ink-200 bg-white p-6">
+    <div className="rounded-2xl border border-ink-200 bg-white p-4 lg:p-6">
       <div className="flex items-end justify-between mb-6">
         <div>
           <h3 className="text-lg font-bold text-ink-900">Ventas últimos 7 días</h3>
@@ -28,7 +28,7 @@ export function SalesChart() {
         </div>
       </div>
 
-      <div className="h-72">
+     <div className="h-56 lg:h-72">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={VENTAS_7_DIAS} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
             <defs>
