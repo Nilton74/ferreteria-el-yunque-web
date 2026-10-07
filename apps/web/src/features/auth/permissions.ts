@@ -67,3 +67,26 @@ export function getDashboardNivel(rol: Rol): DashboardNivel {
   if (rol === 'almacenero') return 'almacen'
   return 'sin-acceso'
 }
+// ============================================
+// Validar ruta de retorno después del login
+// ============================================
+// Evita que un usuario sea redirigido a rutas inválidas
+// o a secciones para las que no tiene permiso.
+export function puedeUsarRutaDeRetorno(rol: Rol, from: string | undefined): boolean {
+  // Sin ruta de retorno
+  if (!from) return false
+
+  // Debe empezar con /
+  if (!from.startsWith('/')) return false
+
+  // No redirigir al propio login/registro
+  if (from.startsWith('/login') || from.startsWith('/registro')) return false
+
+  // Si es admin y quiere ir al panel admin → permitir solo si tiene acceso al panel
+  if (from.startsWith('/admin')) {
+    return tieneAccesoPanel(rol)
+  }
+
+  // Cualquier otra ruta pública → permitir
+  return true
+}
