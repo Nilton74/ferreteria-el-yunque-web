@@ -60,10 +60,7 @@ export function CategoryDonut({ data }: { data: VentaCategoria[] }) {
                   boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
                   fontSize: 13,
                 }}
-                formatter={(value: number, name: string) => [
-                  formatCurrency(value),
-                  name,
-                ]}
+                formatter={(value: any, name: any) => [formatCurrency(Number(value)), String(name)]}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -115,3 +112,4 @@ export function CategoryDonut({ data }: { data: VentaCategoria[] }) {
     </div>
   )
 }
+

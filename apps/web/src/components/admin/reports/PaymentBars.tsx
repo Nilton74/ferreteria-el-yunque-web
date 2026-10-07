@@ -53,7 +53,7 @@ export function PaymentBars({ data }: { data: VentaMetodoPago[] }) {
                 border: '1px solid #e5e7eb',
                 fontSize: 13,
               }}
-              formatter={(value: number) => [formatCurrency(value), 'Ventas']}
+              formatter={(value: any) => [formatCurrency(Number(value)), 'Ventas']}
               cursor={{ fill: '#f3f4f6' }}
             />
             <Bar dataKey="total" radius={[0, 8, 8, 0]}>
@@ -82,3 +82,4 @@ export function PaymentBars({ data }: { data: VentaMetodoPago[] }) {
     </div>
   )
 }
+
