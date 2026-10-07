@@ -1,4 +1,4 @@
-export interface Categoria {
+﻿export interface Categoria {
   id: string
   nombre: string
   slug: string
@@ -32,16 +32,16 @@ export interface Producto {
 }
 
 export const CATEGORIAS: Categoria[] = [
-  { id: '1', nombre: 'Herramientas',  slug: 'herramientas',  emoji: '🔧' },
-  { id: '2', nombre: 'Electricidad',  slug: 'electricidad',  emoji: '⚡' },
-  { id: '3', nombre: 'Plomería',      slug: 'plomeria',      emoji: '🚿' },
-  { id: '4', nombre: 'Construcción',  slug: 'construccion',  emoji: '🧱' },
-  { id: '5', nombre: 'Pinturas',      slug: 'pinturas',      emoji: '🎨' },
-  { id: '6', nombre: 'Tornillería',   slug: 'tornilleria',   emoji: '🔩' },
-  { id: '7', nombre: 'Seguridad',     slug: 'seguridad',     emoji: '🦺' },
-  { id: '8', nombre: 'Jardinería',    slug: 'jardineria',    emoji: '🌱' },
-  { id: '9', nombre: 'Adhesivos',     slug: 'adhesivos',     emoji: '🧴' },
-  { id: '10', nombre: 'Equipos',      slug: 'equipos',       emoji: '🛠️' },
+  { id: '1', nombre: 'Herramientas',  slug: 'herramientas',  emoji: 'ðŸ”§' },
+  { id: '2', nombre: 'Electricidad',  slug: 'electricidad',  emoji: 'âš¡' },
+  { id: '3', nombre: 'PlomerÃ­a',      slug: 'plomeria',      emoji: 'ðŸš¿' },
+  { id: '4', nombre: 'ConstrucciÃ³n',  slug: 'construccion',  emoji: 'ðŸ§±' },
+  { id: '5', nombre: 'Pinturas',      slug: 'pinturas',      emoji: 'ðŸŽ¨' },
+  { id: '6', nombre: 'TornillerÃ­a',   slug: 'tornilleria',   emoji: 'ðŸ”©' },
+  { id: '7', nombre: 'Seguridad',     slug: 'seguridad',     emoji: 'ðŸ¦º' },
+  { id: '8', nombre: 'JardinerÃ­a',    slug: 'jardineria',    emoji: 'ðŸŒ±' },
+  { id: '9', nombre: 'Adhesivos',     slug: 'adhesivos',     emoji: 'ðŸ§´' },
+  { id: '10', nombre: 'Equipos',      slug: 'equipos',       emoji: 'ðŸ› ï¸' },
 ]
 
 export const MARCAS = [
@@ -56,7 +56,7 @@ export const PRODUCTOS: Producto[] = [
     slug: 'taladro-percutor-bosch-800w',
     descripcion: 'Taladro percutor con velocidad variable y portabrocas de 13 mm.',
     descripcionLarga:
-      'El Taladro Percutor Bosch 800W es la herramienta ideal para taladrar en mampostería, madera y metal. Cuenta con motor de 800W de alta potencia, velocidad variable y función percusión. Su diseño ergonómico con empuñadura Softgrip reduce la fatiga en trabajos prolongados. Incluye maletín de transporte y empuñadura auxiliar.',
+      'El Taladro Percutor Bosch 800W es la herramienta ideal para taladrar en mamposterÃ­a, madera y metal. Cuenta con motor de 800W de alta potencia, velocidad variable y funciÃ³n percusiÃ³n. Su diseÃ±o ergonÃ³mico con empuÃ±adura Softgrip reduce la fatiga en trabajos prolongados. Incluye maletÃ­n de transporte y empuÃ±adura auxiliar.',
     categoria: 'herramientas',
     marca: 'Bosch',
     precio: 129.9,
@@ -73,11 +73,11 @@ export const PRODUCTOS: Producto[] = [
       { clave: 'Potencia',     valor: '800 W' },
       { clave: 'Velocidad',    valor: '0 - 3.000 rpm' },
       { clave: 'Portabrocas',  valor: '13 mm' },
-      { clave: 'Percusión',    valor: '0 - 48.000 bpm' },
+      { clave: 'PercusiÃ³n',    valor: '0 - 48.000 bpm' },
       { clave: 'Peso',         valor: '2,2 kg' },
-      { clave: 'Garantía',     valor: '2 años' },
+      { clave: 'GarantÃ­a',     valor: '2 aÃ±os' },
       { clave: 'Voltaje',      valor: '230 V' },
-      { clave: 'Incluye',      valor: 'Maletín + empuñadura auxiliar' },
+      { clave: 'Incluye',      valor: 'MaletÃ­n + empuÃ±adura auxiliar' },
     ],
     destacado: true,
     rating: 4.8,
@@ -90,7 +90,7 @@ export const PRODUCTOS: Producto[] = [
     slug: 'amoladora-angular-makita-720w',
     descripcion: 'Amoladora compacta ideal para corte y desbaste en obra.',
     descripcionLarga:
-      'Amoladora angular Makita de 720W con disco de 115 mm. Ideal para cortar metal, desbastar soldaduras y trabajar en espacios reducidos. Carcasa compacta y empuñadura lateral para mayor control.',
+      'Amoladora angular Makita de 720W con disco de 115 mm. Ideal para cortar metal, desbastar soldaduras y trabajar en espacios reducidos. Carcasa compacta y empuÃ±adura lateral para mayor control.',
     categoria: 'herramientas',
     marca: 'Makita',
     precio: 89.5,
@@ -106,7 +106,7 @@ export const PRODUCTOS: Producto[] = [
       { clave: 'Disco',      valor: '115 mm' },
       { clave: 'Velocidad',  valor: '11.000 rpm' },
       { clave: 'Peso',       valor: '1,8 kg' },
-      { clave: 'Garantía',   valor: '2 años' },
+      { clave: 'GarantÃ­a',   valor: '2 aÃ±os' },
     ],
     destacado: true,
     rating: 4.6,
@@ -115,11 +115,11 @@ export const PRODUCTOS: Producto[] = [
   {
     id: 'p3',
     sku: 'DEW-TAL-003',
-    nombre: 'Taladro Inalámbrico DeWalt 20V',
+    nombre: 'Taladro InalÃ¡mbrico DeWalt 20V',
     slug: 'taladro-inalambrico-dewalt-20v',
-    descripcion: 'Taladro atornillador con batería de litio y cargador rápido.',
+    descripcion: 'Taladro atornillador con baterÃ­a de litio y cargador rÃ¡pido.',
     descripcionLarga:
-      'Taladro atornillador DeWalt 20V MAX con motor brushless de alto rendimiento. Incluye 2 baterías de litio, cargador rápido y maletín resistente. Ideal para trabajos profesionales.',
+      'Taladro atornillador DeWalt 20V MAX con motor brushless de alto rendimiento. Incluye 2 baterÃ­as de litio, cargador rÃ¡pido y maletÃ­n resistente. Ideal para trabajos profesionales.',
     categoria: 'herramientas',
     marca: 'DeWalt',
     precio: 189.0,
@@ -134,9 +134,9 @@ export const PRODUCTOS: Producto[] = [
     especificaciones: [
       { clave: 'Voltaje',       valor: '20 V' },
       { clave: 'Motor',         valor: 'Brushless' },
-      { clave: 'Par máximo',    valor: '65 Nm' },
+      { clave: 'Par mÃ¡ximo',    valor: '65 Nm' },
       { clave: 'Portabrocas',   valor: '13 mm' },
-      { clave: 'Batería',       valor: '2x 2.0 Ah Li-ion' },
+      { clave: 'BaterÃ­a',       valor: '2x 2.0 Ah Li-ion' },
       { clave: 'Peso',          valor: '1,5 kg' },
     ],
     destacado: true,
@@ -149,9 +149,9 @@ export const PRODUCTOS: Producto[] = [
     sku: 'STA-CAJ-004',
     nombre: 'Caja de Herramientas Stanley 19"',
     slug: 'caja-herramientas-stanley-19',
-    descripcion: 'Caja metálica con organizador interior y cierre reforzado.',
+    descripcion: 'Caja metÃ¡lica con organizador interior y cierre reforzado.',
     descripcionLarga:
-      'Caja de herramientas Stanley de 19 pulgadas fabricada en metal lacado. Incluye bandeja organizadora interior y cierre metálico reforzado. Capacidad para herramientas de mano profesionales.',
+      'Caja de herramientas Stanley de 19 pulgadas fabricada en metal lacado. Incluye bandeja organizadora interior y cierre metÃ¡lico reforzado. Capacidad para herramientas de mano profesionales.',
     categoria: 'herramientas',
     marca: 'Stanley',
     precio: 45.9,
@@ -163,7 +163,7 @@ export const PRODUCTOS: Producto[] = [
     ],
     especificaciones: [
       { clave: 'Material',  valor: 'Acero lacado' },
-      { clave: 'Tamaño',    valor: '19 pulgadas' },
+      { clave: 'TamaÃ±o',    valor: '19 pulgadas' },
       { clave: 'Bandejas',  valor: '1 interior' },
       { clave: 'Peso',      valor: '2,4 kg' },
     ],
@@ -176,9 +176,9 @@ export const PRODUCTOS: Producto[] = [
     sku: 'PHI-BOM-005',
     nombre: 'Bombilla LED Philips 9W E27',
     slug: 'bombilla-led-philips-9w',
-    descripcion: 'Luz cálida de bajo consumo, 15.000 horas de vida útil.',
+    descripcion: 'Luz cÃ¡lida de bajo consumo, 15.000 horas de vida Ãºtil.',
     descripcionLarga:
-      'Bombilla LED Philips de 9W con rosca E27. Emite luz cálida de 2.700K. Bajo consumo, encendido instantáneo y 15.000 horas de vida útil. Ahorra hasta un 85% respecto a bombillas incandescentes.',
+      'Bombilla LED Philips de 9W con rosca E27. Emite luz cÃ¡lida de 2.700K. Bajo consumo, encendido instantÃ¡neo y 15.000 horas de vida Ãºtil. Ahorra hasta un 85% respecto a bombillas incandescentes.',
     categoria: 'electricidad',
     marca: 'Philips',
     precio: 4.9,
@@ -191,9 +191,9 @@ export const PRODUCTOS: Producto[] = [
     especificaciones: [
       { clave: 'Potencia',       valor: '9 W' },
       { clave: 'Casquillo',      valor: 'E27' },
-      { clave: 'Temperatura',    valor: '2.700 K (cálida)' },
+      { clave: 'Temperatura',    valor: '2.700 K (cÃ¡lida)' },
       { clave: 'Flujo luminoso', valor: '806 lm' },
-      { clave: 'Vida útil',      valor: '15.000 h' },
+      { clave: 'Vida Ãºtil',      valor: '15.000 h' },
     ],
     destacado: true,
     rating: 4.7,
@@ -202,11 +202,11 @@ export const PRODUCTOS: Producto[] = [
   {
     id: 'p6',
     sku: 'TRU-CAB-006',
-    nombre: 'Cable Eléctrico 2x2.5mm 100m',
+    nombre: 'Cable ElÃ©ctrico 2x2.5mm 100m',
     slug: 'cable-electrico-2x25mm-100m',
     descripcion: 'Rollo de cable flexible para instalaciones de 220V.',
     descripcionLarga:
-      'Rollo de 100 metros de cable eléctrico flexible de 2x2,5 mm². Apto para instalaciones interiores de 220V. Aislamiento de PVC de alta calidad y cobre electrolítico.',
+      'Rollo de 100 metros de cable elÃ©ctrico flexible de 2x2,5 mmÂ². Apto para instalaciones interiores de 220V. Aislamiento de PVC de alta calidad y cobre electrolÃ­tico.',
     categoria: 'electricidad',
     marca: 'Truper',
     precio: 74.9,
@@ -217,9 +217,9 @@ export const PRODUCTOS: Producto[] = [
       'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=800&h=800&fit=crop',
     ],
     especificaciones: [
-      { clave: 'Sección',      valor: '2x2,5 mm²' },
+      { clave: 'SecciÃ³n',      valor: '2x2,5 mmÂ²' },
       { clave: 'Longitud',     valor: '100 m' },
-      { clave: 'Tensión',      valor: '220 V' },
+      { clave: 'TensiÃ³n',      valor: '220 V' },
       { clave: 'Aislamiento',  valor: 'PVC' },
     ],
     destacado: true,
@@ -233,7 +233,7 @@ export const PRODUCTOS: Producto[] = [
     slug: 'sikabond-adhesivo-universal-300ml',
     descripcion: 'Adhesivo de montaje de alta resistencia para interior y exterior.',
     descripcionLarga:
-      'Adhesivo de montaje SikaBond en cartucho de 300 ml. Alta resistencia inicial, apto para interior y exterior. Adhiere sobre madera, metal, cerámica, hormigón y la mayoría de plásticos.',
+      'Adhesivo de montaje SikaBond en cartucho de 300 ml. Alta resistencia inicial, apto para interior y exterior. Adhiere sobre madera, metal, cerÃ¡mica, hormigÃ³n y la mayorÃ­a de plÃ¡sticos.',
     categoria: 'adhesivos',
     marca: 'Sika',
     precio: 12.9,
@@ -258,9 +258,9 @@ export const PRODUCTOS: Producto[] = [
     sku: '3M-MAS-008',
     nombre: 'Mascarilla 3M FFP2 (pack 5)',
     slug: 'mascarilla-3m-ffp2-pack-5',
-    descripcion: 'Protección respiratoria contra polvo y partículas.',
+    descripcion: 'ProtecciÃ³n respiratoria contra polvo y partÃ­culas.',
     descripcionLarga:
-      'Pack de 5 mascarillas 3M FFP2 con válvula de exhalación. Filtración del 94% de partículas. Ajuste ergonómico y banda elástica reforzada.',
+      'Pack de 5 mascarillas 3M FFP2 con vÃ¡lvula de exhalaciÃ³n. FiltraciÃ³n del 94% de partÃ­culas. Ajuste ergonÃ³mico y banda elÃ¡stica reforzada.',
     categoria: 'seguridad',
     marca: '3M',
     precio: 9.9,
@@ -271,9 +271,9 @@ export const PRODUCTOS: Producto[] = [
     ],
     especificaciones: [
       { clave: 'Normativa',    valor: 'FFP2' },
-      { clave: 'Filtración',   valor: '94%' },
+      { clave: 'FiltraciÃ³n',   valor: '94%' },
       { clave: 'Unidades',     valor: '5 por pack' },
-      { clave: 'Válvula',      valor: 'Sí' },
+      { clave: 'VÃ¡lvula',      valor: 'SÃ­' },
     ],
     destacado: true,
     rating: 4.8,

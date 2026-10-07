@@ -77,10 +77,10 @@ export default function ProductPage() {
         </nav>
 
         {/* Grid principal */}
-      <div className="grid md:grid-cols-[380px_1fr] gap-6 lg:gap-10">
+      <div className="grid md:grid-cols-[320px_1fr] gap-6 lg:gap-10">
           {/* Galería */}
           <div>
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-ink-100 border border-ink-200 w-full max-w-[380px] mx-auto md:mx-0">
+            <div className="relative aspect-square rounded-2xl overflow-hidden bg-ink-100 border border-ink-200 w-full max-w-[320px] mx-auto md:mx-0">
               <img
                 src={producto.imagenes[imagenActiva]}
                 alt={producto.nombre}
@@ -113,7 +113,7 @@ export default function ProductPage() {
             </div>
 
             {producto.imagenes.length > 1 && (
-             <div className="mt-3 grid grid-cols-5 gap-2">
+             <div className="mt-3 grid grid-cols-5 gap-2 max-w-[320px] mx-auto md:mx-0">
                 {producto.imagenes.map((img, i) => (
                   <button
                     key={i}
@@ -345,5 +345,6 @@ function TabButton({
     </button>
   )
 }
+
 
 
