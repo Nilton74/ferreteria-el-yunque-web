@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import {
   User, Package, MapPin, Heart, LogOut, Plus, Pencil, Trash2,
-  Star, Mail, Phone, Home, ShoppingBag, TrendingUp, Wallet,
+  Star, Phone, Home, ShoppingBag, TrendingUp, Wallet,
   PackageX, Eye, RefreshCw, Check,
 } from 'lucide-react'
 
@@ -19,7 +19,7 @@ import { useCartStore } from '@/store/cartStore'
 import {
   useProfileStore,
   type Direccion,
-} from '@/features/clients/clientProfileStore'
+} from '@/features/clientes/clientProfileStore'
 import { getPedidos, type Pedido } from '@/features/orders/mockOrders'
 import { PRODUCTOS } from '@/features/products/mockProducts'
 import { formatCurrency, cn } from '@/lib/utils'
@@ -399,7 +399,7 @@ function DireccionesTab() {
         />
       ) : (
         <div className="grid sm:grid-cols-2 gap-3 lg:gap-4">
-          {direcciones.map((d) => (
+          {direcciones.map((d: Direccion) => (
             <div
               key={d.id}
               className={cn(
@@ -488,41 +488,25 @@ function DireccionFormModal({
   direccion: Direccion | null
   onSave: (data: Omit<Direccion, 'id'>) => void
 }) {
-  const [form, setForm] = useState<Omit<Direccion, 'id'>>({
-    alias: 'Casa',
-    nombre: '',
-    telefono: '',
-    direccion: '',
-    ciudad: '',
-    codigoPostal: '',
-    provincia: '',
-    principal: false,
-  })
-
-  useEffect(() => {
-    if (open) {
-      if (direccion) {
-        const { id, ...rest } = direccion
-        setForm(rest)
-      } else {
-        setForm({
-          alias: 'Casa',
-          nombre: '',
-          telefono: '',
-          direccion: '',
-          ciudad: '',
-          codigoPostal: '',
-          provincia: '',
-          principal: false,
-        })
+  const initialForm = (value: Direccion | null): Omit<Direccion, 'id'> => {
+    if (!value) {
+      return {
+        alias: 'Casa',
+        nombre: '',
+        telefono: '',
+        direccion: '',
+        ciudad: '',
+        codigoPostal: '',
+        provincia: '',
+        principal: false,
       }
     }
-  }, [open, direccion])
 
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault()
-    onSave(form)
+    const { id, ...rest } = value
+    return rest
   }
+
+  if (!open) return null
 
   return (
     <Modal
@@ -539,64 +523,86 @@ function DireccionFormModal({
         </>
       }
     >
-      <form id="dir-form" onSubmit={handleSave} className="space-y-4">
-        <Input
-          label="Alias"
-          placeholder="Casa, Oficina, Obra..."
-          value={form.alias}
-          onChange={(e) => setForm({ ...form, alias: e.target.value })}
-          required
-        />
-        <Input
-          label="Nombre completo"
-          value={form.nombre}
-          onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-          required
-        />
-        <Input
-          label="Teléfono"
-          value={form.telefono}
-          onChange={(e) => setForm({ ...form, telefono: e.target.value })}
-          required
-        />
-        <Input
-          label="Dirección"
-          value={form.direccion}
-          onChange={(e) => setForm({ ...form, direccion: e.target.value })}
-          required
-        />
-        <div className="grid sm:grid-cols-2 gap-4">
-          <Input
-            label="Ciudad"
-            value={form.ciudad}
-            onChange={(e) => setForm({ ...form, ciudad: e.target.value })}
-            required
-          />
-          <Input
-            label="Código postal"
-            value={form.codigoPostal}
-            onChange={(e) => setForm({ ...form, codigoPostal: e.target.value })}
-            required
-          />
-        </div>
-        <Input
-          label="Provincia"
-          value={form.provincia}
-          onChange={(e) => setForm({ ...form, provincia: e.target.value })}
-          required
-        />
-
-        <label className="inline-flex items-center gap-2 cursor-pointer pt-1">
-          <input
-            type="checkbox"
-            checked={form.principal}
-            onChange={(e) => setForm({ ...form, principal: e.target.checked })}
-            className="rounded border-ink-300 text-yunque-500 focus:ring-yunque-400"
-          />
-          <span className="text-sm text-ink-700">Marcar como dirección principal</span>
-        </label>
-      </form>
+      <DireccionFormContent
+        initialForm={initialForm(direccion)}
+        onSave={onSave}
+      />
     </Modal>
+  )
+}
+
+function DireccionFormContent({
+  initialForm,
+  onSave,
+}: {
+  initialForm: Omit<Direccion, 'id'>
+  onSave: (data: Omit<Direccion, 'id'>) => void
+}) {
+  const [form, setForm] = useState<Omit<Direccion, 'id'>>(initialForm)
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSave(form)
+  }
+
+  return (
+    <form id="dir-form" onSubmit={handleSave} className="space-y-4">
+      <Input
+        label="Alias"
+        placeholder="Casa, Oficina, Obra..."
+        value={form.alias}
+        onChange={(e) => setForm({ ...form, alias: e.target.value })}
+        required
+      />
+      <Input
+        label="Nombre completo"
+        value={form.nombre}
+        onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+        required
+      />
+      <Input
+        label="Teléfono"
+        value={form.telefono}
+        onChange={(e) => setForm({ ...form, telefono: e.target.value })}
+        required
+      />
+      <Input
+        label="Dirección"
+        value={form.direccion}
+        onChange={(e) => setForm({ ...form, direccion: e.target.value })}
+        required
+      />
+      <div className="grid sm:grid-cols-2 gap-4">
+        <Input
+          label="Ciudad"
+          value={form.ciudad}
+          onChange={(e) => setForm({ ...form, ciudad: e.target.value })}
+          required
+        />
+        <Input
+          label="Código postal"
+          value={form.codigoPostal}
+          onChange={(e) => setForm({ ...form, codigoPostal: e.target.value })}
+          required
+        />
+      </div>
+      <Input
+        label="Provincia"
+        value={form.provincia}
+        onChange={(e) => setForm({ ...form, provincia: e.target.value })}
+        required
+      />
+
+      <label className="inline-flex items-center gap-2 cursor-pointer pt-1">
+        <input
+          type="checkbox"
+          checked={form.principal}
+          onChange={(e) => setForm({ ...form, principal: e.target.checked })}
+          className="rounded border-ink-300 text-yunque-500 focus:ring-yunque-400"
+        />
+        <span className="text-sm text-ink-700">Marcar como dirección principal</span>
+      </label>
+    </form>
   )
 }
 
