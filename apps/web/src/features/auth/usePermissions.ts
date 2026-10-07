@@ -1,10 +1,12 @@
-import { useAuthStore } from '@/store/authStore'
+﻿import { useAuthStore } from '@/store/authStore'
 import {
   puedeAcceder,
   tieneAccesoPanel,
   nivelAcceso,
+  getDashboardNivel,
   type Modulo,
   type NivelAcceso,
+  type DashboardNivel,
 } from './permissions'
 
 export function usePermissions() {
@@ -16,6 +18,7 @@ export function usePermissions() {
     tieneAccesoPanel: tieneAccesoPanel(rol),
     puede: (modulo: Modulo) => puedeAcceder(rol, modulo),
     nivel: (modulo: Modulo): NivelAcceso => nivelAcceso(rol, modulo),
+    dashboardNivel: (): DashboardNivel => getDashboardNivel(rol),
     esAdmin: rol === 'admin' || rol === 'superadmin',
     esVendedor: rol === 'vendedor',
     esAlmacenero: rol === 'almacenero',
