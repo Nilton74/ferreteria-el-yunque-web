@@ -35,7 +35,6 @@ export function ProductCard({ producto }: { producto: Producto }) {
           loading="lazy"
         />
 
-        {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {tienePromo && (
             <span className="rounded-full bg-red-500 text-white text-xs font-bold px-2 py-1">
@@ -85,7 +84,7 @@ export function ProductCard({ producto }: { producto: Producto }) {
             onClick={handleAdd}
             disabled={producto.stock === 0}
             className="h-10 w-10 grid place-items-center rounded-lg bg-yunque-500 text-ink-900 hover:bg-yunque-400 transition disabled:opacity-40 disabled:cursor-not-allowed"
-            title="AÃ±adir al carrito"
+            title="Añadir al carrito"
           >
             <ShoppingCart className="h-4 w-4" />
           </button>
