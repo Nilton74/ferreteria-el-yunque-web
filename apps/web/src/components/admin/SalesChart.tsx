@@ -15,7 +15,9 @@ export function SalesChart() {
     <div className="rounded-2xl border border-ink-200 bg-white p-4 lg:p-6">
       <div className="flex items-end justify-between mb-6">
         <div>
-          <h3 className="text-lg font-bold text-ink-900">Ventas Ãºltimos 7 dÃ­as</h3>
+          <h3 className="text-lg font-bold text-ink-900">
+            Ventas últimos 7 días
+          </h3>
           <p className="text-sm text-ink-500">Ingresos diarios</p>
         </div>
         <div className="text-right">
@@ -28,9 +30,12 @@ export function SalesChart() {
         </div>
       </div>
 
-     <div className="h-56 lg:h-72">
+      <div className="h-64 lg:h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={VENTAS_7_DIAS} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+          <AreaChart
+            data={VENTAS_7_DIAS}
+            margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
+          >
             <defs>
               <linearGradient id="colorVentas" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#f0b429" stopOpacity={0.4} />
@@ -50,7 +55,7 @@ export function SalesChart() {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(v) => `â‚¬${v / 1000}k`}
+              tickFormatter={(v) => `€${v / 1000}k`}
             />
             <Tooltip
               contentStyle={{
