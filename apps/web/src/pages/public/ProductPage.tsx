@@ -77,10 +77,10 @@ export default function ProductPage() {
         </nav>
 
         {/* Grid principal */}
-      <div className="grid lg:grid-cols-[420px_1fr] gap-6 lg:gap-10">
+      <div className="grid md:grid-cols-[380px_1fr] gap-6 lg:gap-10">
           {/* Galería */}
           <div>
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-ink-100 border border-ink-200 w-full">
+            <div className="relative aspect-square rounded-2xl overflow-hidden bg-ink-100 border border-ink-200 w-full max-w-[380px] mx-auto md:mx-0">
               <img
                 src={producto.imagenes[imagenActiva]}
                 alt={producto.nombre}
@@ -345,4 +345,5 @@ function TabButton({
     </button>
   )
 }
+
 
