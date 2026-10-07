@@ -25,7 +25,7 @@ export function tieneAccesoPanel(rol: Rol): boolean {
 export function puedeAcceder(rol: Rol, modulo: Modulo): boolean {
   const permisos = PERMISOS_POR_ROL[rol]
   if (permisos.length === 0) return false
-  if (permisos.includes('*')) return true
+  if (permisos[0] === '*') return true
   return (permisos as Modulo[]).includes(modulo)
 }
 
