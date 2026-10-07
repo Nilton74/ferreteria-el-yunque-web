@@ -26,7 +26,7 @@ export default function ProductPage() {
   const [tab, setTab] = useState<Tab>('descripcion')
   const add = useCartStore((s) => s.add)
 
-  // Resetear scroll cuando cambia el producto (por si acaso)
+  // Scroll al top al cambiar de producto
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
   }, [slug])
@@ -59,7 +59,7 @@ export default function ProductPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 py-4 lg:py-6">
-        {/* Breadcrumb compacto */}
+        {/* Breadcrumb */}
         <nav className="flex items-center gap-1 text-xs lg:text-sm text-ink-500 mb-3 lg:mb-5 flex-wrap">
           <Link to="/" className="hover:text-ink-900">Inicio</Link>
           <ChevronRight className="h-3.5 w-3.5" />
@@ -76,9 +76,9 @@ export default function ProductPage() {
           <span className="text-ink-900 font-medium truncate">{producto.nombre}</span>
         </nav>
 
-        {/* Grid principal */}
-      <div className="grid md:grid-cols-[320px_1fr] gap-6 lg:gap-10">
-          {/* Galería */}
+        {/* Grid principal: imagen 320px + info flexible */}
+        <div className="grid md:grid-cols-[320px_1fr] gap-6 lg:gap-10">
+          {/* ==================== Galería ==================== */}
           <div>
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-ink-100 border border-ink-200 w-full max-w-[320px] mx-auto md:mx-0">
               <img
@@ -112,8 +112,9 @@ export default function ProductPage() {
               </div>
             </div>
 
+            {/* Miniaturas */}
             {producto.imagenes.length > 1 && (
-             <div className="mt-3 grid grid-cols-5 gap-2 max-w-[320px] mx-auto md:mx-0">
+              <div className="mt-3 grid grid-cols-5 gap-2 max-w-[320px] mx-auto md:mx-0">
                 {producto.imagenes.map((img, i) => (
                   <button
                     key={i}
@@ -132,8 +133,8 @@ export default function ProductPage() {
             )}
           </div>
 
-          {/* Info */}
-          <div>
+          {/* ==================== Info ==================== */}
+          <div className="min-w-0">
             <div className="flex items-center gap-2 text-xs lg:text-sm">
               <span className="font-bold text-yunque-700 uppercase tracking-wide">
                 {producto.marca}
@@ -146,6 +147,7 @@ export default function ProductPage() {
               {producto.nombre}
             </h1>
 
+            {/* Rating */}
             <div className="mt-2 flex items-center gap-2 text-xs lg:text-sm">
               <div className="flex items-center gap-0.5">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -164,6 +166,7 @@ export default function ProductPage() {
               <span className="text-ink-500">({producto.reviews})</span>
             </div>
 
+            {/* Precio */}
             <div className="mt-3 flex items-end gap-2 flex-wrap">
               <span className="text-3xl lg:text-4xl font-black text-ink-900">
                 {formatCurrency(precioFinal)}
@@ -181,10 +184,12 @@ export default function ProductPage() {
             </div>
             <p className="mt-0.5 text-[11px] text-ink-500">IVA incluido</p>
 
+            {/* Descripción corta */}
             <p className="mt-3 text-sm lg:text-base text-ink-600 leading-relaxed">
               {producto.descripcion}
             </p>
 
+            {/* Stock */}
             <div className="mt-3 flex items-center gap-2 text-sm">
               {agotado ? (
                 <span className="inline-flex items-center gap-1.5 text-red-600 font-medium">
@@ -201,6 +206,7 @@ export default function ProductPage() {
               )}
             </div>
 
+            {/* Cantidad + Añadir */}
             <div className="mt-4 flex flex-wrap gap-2 lg:gap-3">
               <div className="inline-flex items-center rounded-lg border border-ink-200 bg-white">
                 <button
@@ -230,6 +236,7 @@ export default function ProductPage() {
               </Button>
             </div>
 
+            {/* Trust badges */}
             <div className="mt-4 grid grid-cols-3 gap-2">
               <TrustBadge icon={Truck} title="Envío" subtitle="24-48h" />
               <TrustBadge icon={RotateCcw} title="Devolución" subtitle="30 días" />
@@ -277,7 +284,7 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* Relacionados */}
+        {/* ==================== Relacionados ==================== */}
         {relacionados.length > 0 && (
           <section className="mt-10 lg:mt-14">
             <div className="flex items-end justify-between mb-4">
@@ -303,6 +310,8 @@ export default function ProductPage() {
     </div>
   )
 }
+
+// ==================== Subcomponentes ====================
 
 function TrustBadge({
   icon: Icon,
@@ -345,6 +354,3 @@ function TabButton({
     </button>
   )
 }
-
-
-
